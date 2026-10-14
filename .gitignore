@@ -1,0 +1,5 @@
+dist/
+node_modules/
+.env
+.env.*
+press/sound-de-barrio-fotos.zip

@@ -1,0 +1,20 @@
+import { mkdir, cp, readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { createPressArchive } from './press-archive.mjs';
+const root=resolve(import.meta.dirname,'..');
+const site=new URL(process.env.SITE_URL || 'https://alandiaz145.github.io/sound-de-barrio-web/');
+if (site.protocol!=='https:' || site.search || site.hash) throw new Error('SITE_URL debe ser una URL HTTPS sin query ni fragmento');
+if (!site.pathname.endsWith('/')) site.pathname+='/';
+const url=site.href;
+await mkdir(resolve(root,'dist'),{recursive:true});
+for (const file of ['index.html','fuentes.html','styles.css','app.js','assets','press']) await cp(resolve(root,file),resolve(root,'dist',file),{recursive:true});
+await createPressArchive(resolve(root,'dist/press'));
+let html=await readFile(resolve(root,'index.html'),'utf8');
+html=html.replace('</head>',`<link rel="canonical" href="${url}"><meta property="og:url" content="${url}"></head>`).replaceAll('content="assets/social.jpg"',`content="${url}assets/social.jpg"`);
+html=html.replace(/<script type="application\/ld\+json">(.*?)<\/script>/s,(_,value)=>{const data=JSON.parse(value);data.url=url;data['@id']=url+'#artist';data.image=url+'assets/social.jpg';return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;});
+await writeFile(resolve(root,'dist/index.html'),html);
+await writeFile(resolve(root,'dist/sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${url}</loc></url></urlset>\n`);
+await writeFile(resolve(root,'dist/robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${url}sitemap.xml\n`);
+await writeFile(resolve(root,'dist/.nojekyll'),'');
+if(process.env.CUSTOM_DOMAIN){if(!/^[a-z0-9.-]+$/i.test(process.env.CUSTOM_DOMAIN))throw new Error('CUSTOM_DOMAIN inválido');await writeFile(resolve(root,'dist/CNAME'),process.env.CUSTOM_DOMAIN+'\n');}
+console.log(`Build listo: dist/ — URL configurada: ${url}`);
