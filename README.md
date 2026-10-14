@@ -16,7 +16,7 @@ Abrir http://127.0.0.1:4173. Contrataciones enlaza al canal público de Parulo P
 
 ## Publicar
 
-El workflow `.github/workflows/pages.yml` construye, verifica y despliega `dist/` con cada push a `main`. En **Settings → Pages → Build and deployment**, seleccionar **GitHub Actions**. La URL prevista es https://alandiaz145.github.io/sound-de-barrio-web/; el código no implica que ya esté publicado.
+Publicado en https://alandiaz145.github.io/sound-de-barrio-web/ el 14 de octubre de 2026. Código: https://github.com/alandiaz145/sound-de-barrio-web. GitHub Pages está configurado con GitHub Actions. El workflow `.github/workflows/pages.yml` construye, verifica y despliega `dist/` con cada push a `main`.
 
 ## Dominio propio
 
@@ -31,7 +31,7 @@ Fuentes públicas detalladas en `fuentes.html`. No hay métricas de audiencia, f
 
 Último video verificado el 14 de octubre de 2026 en el canal oficial, pestaña Videos ordenada por Más recientes: `ieLvWEjeDYk`, “Y tu te vas, Luna”. El reproductor permite elegir otras sesiones. Para actualizarlo, cambiar el iframe inicial y el botón Último video en `index.html`; no se actualiza automáticamente ni usa credenciales de YouTube.
 
-Se recuperaron 10 archivos por nombre del chat original; `Sound de Barrio 3.png` y `Sound de Barrio 3(1).png` son idénticos. Los 10 originales están en `press/` y en el ZIP; la galería muestra 9 imágenes únicas. `asset-manifest.json` incluye nombres, dimensiones y SHA-256. Las copias WebP solo se redimensionan/comprimen; caras y marcas no se retocan. La cabecera textual es provisional hasta recibir el logo original. Faltan los demás archivos del conjunto solicitado de 15.
+Se recuperaron 10 archivos por nombre del chat original; `Sound de Barrio 3.png` y `Sound de Barrio 3(1).png` son idénticos. Los 10 originales están en `press/`; el build genera un ZIP de fotos y biografía para la descarga pública. La galería muestra 9 imágenes únicas. `asset-manifest.json` incluye nombres, dimensiones y SHA-256. Las copias WebP solo se redimensionan/comprimen; caras y marcas no se retocan. La cabecera textual es provisional hasta recibir el logo original. Faltan los demás archivos del conjunto solicitado de 15.
 
 ## Rendimiento y accesibilidad
 
@@ -42,3 +42,4 @@ Imagen principal con preload, fetchpriority y srcset. Galería, fotos secundaria
 - Recibir los 5 archivos restantes y el logo oficial, y aprobar contacto de contrataciones.
 - Confirmar el año de formación si se desea incluirlo.
 - Elegir dominio y configurar DNS; validar funcionamiento y rendimiento del alojamiento final.
+
